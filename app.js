@@ -38,6 +38,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // app.use(express.static(path.join(__dirname, 'public')));
 
+// Conexión base de datos
+const mongoose = require('mongoose');
+
+const uri = 'mongodb://localhost:27017/myapp';
+const options = {useNewUrlParser: true, useCreateIndex: true};
+
+//routes with mongo
+app.use('/api', require('./src/routes/cancion'));
+
+
 // Rutas
 app.get('/', (req, res) => {
   res.send('Hello World!');
@@ -52,3 +62,14 @@ app.set('puerto', process.env.PORT || 3000);
 app.listen(app.get('puerto'), () => {
   console.log('Example app listening on port'+ app.get('puerto'));
 });
+
+
+
+
+// Or using promises
+mongoose.connect(uri, options).then(
+  /** ready to use. The `mongoose.connect()` promise resolves to mongoose instance. */
+  () => { console.log('Connected to MP3 downloader,Welcome from COLOMBIA') },
+  /** handle initial connection error */
+  err => { console.log(err) }
+);
