@@ -48,11 +48,6 @@ const options = {useNewUrlParser: true, useCreateIndex: true};
 app.use('/api', require('./src/routes/cancion'));
 
 
-// Rutas
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
-
 // Middleware para Vue.js router modo history
 const history = require('connect-history-api-fallback');
 app.use(history());

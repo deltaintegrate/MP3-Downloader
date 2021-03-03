@@ -10,6 +10,7 @@
     "mongoose": "^5.11.18",
     "morgan": "^1.10.0",
     "os": "^0.1.1",
+    "vue-router": "^3.5.1",
     "youtube-mp3-downloader": "^0.7.6"
   },
   "devDependencies": {
