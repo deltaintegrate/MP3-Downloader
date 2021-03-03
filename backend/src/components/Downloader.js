@@ -4,11 +4,13 @@ var os = require("os");
 var Downloader = function() {
 
     var self = this;
+    const homedir = require('os').homedir()+"/Desktop";
+    console.log(homedir);
 
     //Configure YoutubeMp3Downloader with your settings 
     self.YD = new YoutubeMp3Downloader({
         "ffmpegPath": "/usr/local/bin/ffmpeg",  // FFmpeg binary location TODO: Set correct path before testing!
-        "outputPath": "./src/output",
+        "outputPath": homedir,
         "queueParallelism": 2,                  // Download parallelism (default: 1)
         "progressTimeout": 2000                 // Interval in ms for the progress reports (default: 1000)
     });

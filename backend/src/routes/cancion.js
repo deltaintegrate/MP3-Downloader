@@ -1,13 +1,31 @@
 import express from 'express';
+import Downloader from '../components/Downloader'
 const router = express.Router();
+var url = require('url');
 
 // importar el modelo nota
 import Cancion from '../models/cancion';
 
 // Agregar una nota
 router.post('/cancion', async(req, res) => {
+
+  var dl = new Downloader();
   const body = req.body;  
   try {
+    let i =0;
+    console.log(body.nombre);
+    var url_parts = url.parse(body.nombre, true);
+    console.log("llegue aqui");
+    var query = JSON.parse(JSON.stringify(url_parts.query));
+    console.log(query["v"]);
+    dl.getMP3({videoId: query["v"]}, function(err,res){
+      i++;
+      if(err)
+          throw err;
+      else{
+          console.log("Song "+ i + " was downloaded: " + res.file);
+      }
+    });
     const cancionDB = await Cancion.create(body);
     res.status(200).json(cancionDB); 
   } catch (error) {
